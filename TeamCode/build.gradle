@@ -1,0 +1,79 @@
+
+apply from: '../build.common.gradle'
+apply from: '../build.dependencies.gradle'
+apply plugin: 'kotlin-android'
+apply plugin: 'dev.frozenmilk.sinister.sloth.Load'
+
+android {
+    namespace = 'org.firstinspires.ftc.teamcode'
+
+    packagingOptions {
+        jniLibs.useLegacyPackaging true
+    }
+
+    // Add these compiler options
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+}
+
+buildscript {
+    ext.kotlin_version = '1.9.0'  // Changed from 1.8.0 to 1.7.20
+
+    repositories {
+        mavenCentral()
+        maven {
+            url = 'https://www.matthewo.tech/maven/'
+        }
+        maven {
+            url = 'https://repo.dairy.foundation/snapshots'
+        }
+
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "dev.frozenmilk.sinister.sloth:Load:0.0.2"
+    }
+}
+
+
+repositories {
+
+    maven {
+        url = 'https://repo.dairy.foundation/releases'
+    }
+    maven {
+        url = 'https://repo.dairy.foundation/snapshots'
+    }
+
+    maven {
+        url = 'https://maven.brott.dev/'
+    }
+
+    maven {
+        url = 'https://jitpack.io'
+    }
+    maven {
+        url = 'https://www.matthewo.tech/maven/'
+    }
+
+}
+
+dependencies {
+    implementation project(':FtcRobotController')
+
+    implementation "com.acmerobotics.roadrunner:core:1.0.0"
+    implementation "com.acmerobotics.roadrunner:actions:1.0.0"
+    implementation "com.acmerobotics.dashboard:dashboard:0.4.16"
+    implementation 'com.github.jdhs-ftc:road-runner-ftc-otos:-SNAPSHOT'
+    implementation "com.github.6165-MSET-CuttleFish:MeepMeep:-SNAPSHOT"
+    implementation 'org.ftclib.ftclib:core:2.0.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
+    implementation 'dev.frozenmilk.sinister:Sloth:0.0.1'
+    implementation 'dev.frozenmilk.sinister.sloth:DashFix:0.0.0'
+}
